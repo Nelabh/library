@@ -8,7 +8,6 @@ $_SESSION['titleErr']=$_SESSION['authorErr']=$_SESSION['publisherErr']=$_SESSION
 	if(isset($_POST['suggest']))					//Check for Key to ensure secure access to page only
 	{
 	
-		//$titleErr=$authorErr=$publisherErr=$editionErr=$volumeErr=$reviewErr="";
 		
 		$bookname=$_REQUEST['title'];
 		$author=$_REQUEST['author'];

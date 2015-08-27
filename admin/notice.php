@@ -15,7 +15,7 @@ if(isset($_POST['arrivalpost']))
 {
 	$value=$_POST['message'];//message contains the body of notices or posts
 	$subject=$_POST['subject'];// contains short discription of notices or message
-	//$time=date("d/m/y"); //current date and time
+	
 	if(empty($_POST["message"])||empty($_POST["subject"]))
 	{
 		$_SESSION['info'] = "Please Enter The Required Data";

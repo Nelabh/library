@@ -72,13 +72,6 @@ if(isset($_POST['query']))					//Check for Key to ensure secure access to page o
 $stmt = $db->prepare("INSERT INTO `query` (	`name`,`email`,`college`,`rollno`,`course`,`branch`,`message`,`date_posted`) VALUES (?,?,?,?,?,?,?,NOW())");
 		$stmt->bind_param('sssssss', $name,$email,$college,$rollno,$course,$branch,$message);
 		$res=$stmt->execute();     
-		
-/*
-$sql="INSERT INTO `query` (	`name`,`email`,`college`,`rollno`,`course`,`branch`,`message`,`date_posted`) VALUES ('$name','$email','$college','$rollno','$course','$branch','$message',NOW())";
-		$res=mysqli_query($db,$sql);
-
-
-*/
 
 		if(!$res)
 			{
