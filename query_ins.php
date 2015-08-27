@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include('connect.php');
+	$db=dbConnect();
 	$_SESSION['fullnameErr']=$_SESSION['emailErr']=$_SESSION['rollnoErr']=$_SESSION['messageErr']=$_SESSION['info']="";
 
 //BACK-END processing for a submitted user-query
@@ -68,8 +69,17 @@ if(isset($_POST['query']))					//Check for Key to ensure secure access to page o
 	{
 	$_SESSION['titleErr']=$_SESSION['authorErr']=$_SESSION['publisherErr']=$_SESSION['editionErr']=$_SESSION['volumeErr']=$_SESSION['reviewErr']=$_SESSION['info']="";
 
-		$sql="INSERT INTO `query` (	`name`,`email`,`college`,`rollno`,`course`,`branch`,`message`,`date_posted`) VALUES ('$name','$email','$college','$rollno','$course','$branch','$message',NOW())";
+$stmt = $db->prepare("INSERT INTO `query` (	`name`,`email`,`college`,`rollno`,`course`,`branch`,`message`,`date_posted`) VALUES (?,?,?,?,?,?,?,NOW())");
+		$stmt->bind_param('sssssss', $name,$email,$college,$rollno,$course,$branch,$message);
+		$res=$stmt->execute();     
+		
+/*
+$sql="INSERT INTO `query` (	`name`,`email`,`college`,`rollno`,`course`,`branch`,`message`,`date_posted`) VALUES ('$name','$email','$college','$rollno','$course','$branch','$message',NOW())";
 		$res=mysqli_query($db,$sql);
+
+
+*/
+
 		if(!$res)
 			{
 				die("error".mysqli_error($db));

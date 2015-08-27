@@ -1,6 +1,7 @@
 <?php 
 
 include('../connect.php');
+$db=dbConnect();
 session_start();
 if(!isset($_SESSION['username']))
 	{
@@ -38,8 +39,9 @@ if(isset($_POST['arrivalpost']))
 	}
 	else
 	{
-	$sql="INSERT INTO `notices`(`title`,`description`,`date_added`) VALUES('$subject','$value',NOW())";//id is primary key that is auto incremented
-	$res=mysqli_query($db,$sql);
+	$stmt=$db->prepare("INSERT INTO `notices`(`title`,`description`,`date_added`) VALUES(?,?,NOW())");//id is primary key that is auto incremented
+	$stmt->bind_param('ss', $subject,$value);
+		$res=$stmt->execute(); 
 	if(!$res)
 	{
 		die("Error ! ".mysqli_error($db));

@@ -9,6 +9,7 @@ if(!isset($_SESSION['username']))
 	}
 	else{
 include('../connect.php');//Back-end processing for news posted by admin
+$db=dbConnect();
 if(isset($_POST['newspost']))					//Check for Key to ensure secure access to page only
 {
 	$news=$_POST['title'];
@@ -36,9 +37,9 @@ if(isset($_POST['newspost']))					//Check for Key to ensure secure access to pag
 		header('Location:post_news.php');
 	}
 else{
-	$sql="INSERT INTO `news`(`news`,`details`,`date_posted`)
-		VALUES ('$news','$details',NOW())";
-	$res=mysqli_query($db,$sql);
+	$stmt=$db->prepare("INSERT INTO `news`(`news`,`details`,`date_posted`) VALUES (?,?,NOW())");
+	$stmt->bind_param('ss', $news,$details);
+	$res=$stmt->execute(); 
 	if(!$res)
 	{
 		die("Error ! ".mysqli_error($db));

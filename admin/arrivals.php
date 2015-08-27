@@ -8,6 +8,7 @@ session_start();
 	else
 	{
 		include('../connect.php');
+		$db=dbConnect();
 	if(isset($_POST['arrivalpost']))		
 	{
 	$title=$_POST['title'];
@@ -36,8 +37,9 @@ session_start();
 	}
 	else
 {
-	$sql="INSERT INTO `arrivals`(`title`,`details`,`date_of_arrival`) VALUES ('$title','$description',NOW())";
-	$res=mysqli_query($db,$sql);
+	$stmt=$db->prepare("INSERT INTO `arrivals`(`title`,`details`,`date_of_arrival`) VALUES (?,?,NOW())");
+	$stmt->bind_param('ss', $title,$description);
+		$res=$stmt->execute(); 
 	if(!$res)
 	{
 		die("Error ! ".mysqli_error($db));

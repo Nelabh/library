@@ -159,7 +159,7 @@ include('library.php');
                                         <label class=" sr-only">Message</label>
                                         <textarea placeholder="Message" rows="3" name="message"  value="<?php if(isset($_SESSION['message']))echo $_SESSION['message']?>"></textarea><span class="error"><?php if(isset($_SESSION['messageErr']))echo $_SESSION['messageErr'];?></span>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" name="query" id="query" value="query" >Submit</button><span class="error"><?php echo $_SESSION['info'];?></span>
+                                    <button type="submit" class="btn btn-primary" name="query" id="query" value="query" >Submit</button><span class="error"><?php if(isset($_SESSION['info'])) echo $_SESSION['info'];?></span>
                                 </form>
                                 
                             </div>

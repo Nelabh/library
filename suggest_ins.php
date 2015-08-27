@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('connect.php');
+$db=dbConnect();
 $_SESSION['titleErr']=$_SESSION['authorErr']=$_SESSION['publisherErr']=$_SESSION['editionErr']=$_SESSION['volumeErr']=$_SESSION['reviewErr']=$_SESSION['info']="";
 //Back-end processing for user suggestion
 
@@ -67,9 +68,10 @@ $_SESSION['titleErr']=$_SESSION['authorErr']=$_SESSION['publisherErr']=$_SESSION
 	{
 	$_SESSION['titleErr']=$_SESSION['authorErr']=$_SESSION['publisherErr']=$_SESSION['editionErr']=$_SESSION['volumeErr']=$_SESSION['reviewErr']=$_SESSION['info']="";
 
-		$sql="INSERT INTO `suggest`(`bookname`,`author`,`publisher`,`edition`,`volume`,`review`,`date_posted`) VALUES ('$bookname','$author','$publisher','$edition','$volume','$review',NOW())";
+		$stmt = $db->prepare("INSERT INTO `suggest`(`bookname`,`author`,`publisher`,`edition`,`volume`,`review`,`date_posted`) VALUES (?,?,?,?,?,?,NOW())");
 		//	echo $sql;
-		$res=mysqli_query($db,$sql);
+		$stmt->bind_param('ssssss', $bookname,$author,$publisher,$edition,$volume,$review);
+		$res=$stmt->execute();  
 		if(!$res)
 		{
 			die("error".mysqli_error($db));
