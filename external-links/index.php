@@ -107,10 +107,10 @@ if(isset($_SESSION['username']))
                             <h2>External Links</h2>
                             <ul>
                             
-                                <li><a href="http://www.jssaten.ac.in/">JSS Website</a></li>
-                                <li><a href="#">NCS Website</a></li>
-                                <li><a href="http://210.212.85.155/">JSS Infocentre</a></li>
-                                <li><a href="http://210.212.85.155/library/">Old Library site</a></li>
+                                <li><a href="http://www.jssaten.ac.in/" target="_blank">JSS Website</a></li>
+                                <li><a href="http://www.hackncs.com/" target="_blank">NCS Website</a></li>
+                                <li><a href="http://210.212.85.155/" target="_blank">JSS Infocentre</a></li>
+                                <li><a href="http://210.212.85.155/library/" target="_blank">Old Library site</a></li>
                                 
                             </ul>
 
